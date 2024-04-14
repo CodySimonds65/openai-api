@@ -5,7 +5,7 @@ const App = () => {
   const [value, setValue] = useState(null)
   const [message, setMessage] = useState(null)
   const [previousChats, setPreviousChats] = useState([])
-  const [currentTitle, setCurrentTitle] = useState([])
+  const [currentTitle, setCurrentTitle] = useState([null])
 
   const getMessages = async () => {
     const options = {
@@ -69,7 +69,7 @@ const App = () => {
       </section>
       <section className="main">
         <header className="main__header">
-          <h1>Cody GPT Test</h1>
+          {!currentTitle && <h1>Cody GPT Test</h1>}
         </header>
         <ul className="feed"></ul>
 
