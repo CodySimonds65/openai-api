@@ -12,11 +12,11 @@ app.post("/completions", async (req, res) => {
   const Options = {
     method: "POST",
     headers: {
-      "Content-Type": "application/json",
       Authorization: `Bearer ${API_KEY}`,
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      model: "gpt-4",
+      model: "gpt-3.5-turbo",
       messages: [
         {
           role: "system",

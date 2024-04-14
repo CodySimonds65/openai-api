@@ -1,6 +1,30 @@
+import { getMouseEventOptions } from "@testing-library/user-event/dist/utils";
 import "./index.css";
 
 const App = () => {
+  const getMessages = async () => {
+    const Options = {
+      method: "POST",
+      body: JSON.stringify({
+        message: "Hello, how are you?",
+      }),
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    try {
+      const response = await fetch(
+        "http://localhost:8000/completions",
+        Options
+      );
+      const data = response.json();
+      console.log(data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <div className="app">
       <section className="side-bar">
@@ -27,7 +51,9 @@ const App = () => {
               className="message-input"
               placeholder="Type a message"
             />
-            <div id="submit">&#10146;</div>
+            <div id="submit" onClick={getMessages}>
+              &#10146;
+            </div>
           </div>
           <p className="info">Custom API interation/testing interface.</p>
         </div>
