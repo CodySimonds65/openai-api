@@ -1,8 +1,11 @@
 import "./index.css";
+import { useState, useEffect} from "react";
 
 const App = () => {
+  const [message, setMessage] = useState(null)
+
   const getMessages = async () => {
-    const Options = {
+    const options = {
       method: "POST",
       body: JSON.stringify({
         message: "Hello, how are you?",
@@ -13,14 +16,12 @@ const App = () => {
     };
 
     try {
-      const response = await fetch(
-        "http://localhost:8000/completions",
-        Options
-      );
-      const data = response.json();
+      const response = await fetch("http://localhost:8000/completions", options);
+      const data = await response.json();
       console.log(data);
+      setMessage(data.choices[0].message);
     } catch (error) {
-      console.error(error);
+      //console.error(error);
     }
   };
 
