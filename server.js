@@ -3,38 +3,28 @@ const express = require("express");
 const cors = require("cors");
 
 const app = express();
-app.use(express.json);
+app.use(express.json());
 app.use(cors());
 
 const API_KEY = "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";
 
 app.post("/completions", async (req, res) => {
-  const Options = {
+  const options = {
     method: "POST",
     headers: {
-      Authorization: `Bearer ${API_KEY}`,
+      "Authorization": `Bearer ${API_KEY}`,
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
       model: "gpt-3.5-turbo",
-      messages: [
-        {
-          role: "system",
-          content: "You are a helpful assistant.",
-          max_tokens: 150,
-        },
-        {
-          role: "user",
-          content: req.body.message,
-        },
-      ],
+      messages: [{role: "user", content: "How are you?"}],
+      max_tokens: 100,
     }),
   };
   try {
-    const response = await fetch(
-      "https://api.openai.com/v1/chat/completions",
-      Options
-    );
+    const response = await fetch("https://api.openai.com/v1/chat/completions", options)
+    const data = await response.json()
+    res.send(data)
   } catch (error) {
     console.error(error);
   }
