@@ -4,6 +4,8 @@ import { useState, useEffect} from "react";
 const App = () => {
   const [value, setValue] = useState(null)
   const [message, setMessage] = useState(null)
+  const [previousChats, setPreviousChats] = useState([])
+  const [currentTitle, setCurrentTitle] = useState([])
 
   const getMessages = async () => {
     const options = {
@@ -26,7 +28,17 @@ const App = () => {
     }
   };
 
-  console.log(value);
+  useEffect(() => {
+    console.log(currentTitle, value, message)
+    if (!currentTitle && value && message) {
+      setCurrentTitle(value)
+      setPreviousChats([...previousChats, {title: value, message}])
+    } else if (currentTitle && value && message) {
+      setPreviousChats([...previousChats, {title: value, message}])
+    }
+
+  }, [message, currentTitle])
+
 
   return (
     <div className="app">
