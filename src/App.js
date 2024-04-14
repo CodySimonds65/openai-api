@@ -33,8 +33,22 @@ const App = () => {
     if (!currentTitle && value && message) {
       setCurrentTitle(value)
       setPreviousChats([...previousChats, {title: value, message}])
-    } else if (currentTitle && value && message) {
-      setPreviousChats([...previousChats, {title: value, message}])
+    } 
+   if (currentTitle && value && message) {
+      setPreviousChats(prevChats => ([...prevChats,
+         {
+          title: currentTitle,
+          role: "user",
+          content: value,
+
+         },
+          {
+            title: currentTitle,
+            role: message.role,
+            content: message.content
+          }
+        ]
+      )) 
     }
 
   }, [message, currentTitle])
