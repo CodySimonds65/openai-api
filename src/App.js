@@ -2,13 +2,14 @@ import "./index.css";
 import { useState, useEffect} from "react";
 
 const App = () => {
+  const [value, setValue] = useState(null)
   const [message, setMessage] = useState(null)
 
   const getMessages = async () => {
     const options = {
       method: "POST",
       body: JSON.stringify({
-        message: "Hello, how are you?",
+        message: value,
       }),
       headers: {
         "Content-Type": "application/json",
@@ -24,6 +25,8 @@ const App = () => {
       //console.error(error);
     }
   };
+
+  console.log(value);
 
   return (
     <div className="app">
@@ -46,11 +49,7 @@ const App = () => {
 
         <div className="bottom-section">
           <div className="input-container">
-            <input
-              type="text"
-              className="message-input"
-              placeholder="Type a message"
-            />
+            <input value={value} onChange={(e) => setValue(e.target.value)}/>
             <div id="submit" onClick={getMessages}>
               &#10146;
             </div>
