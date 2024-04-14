@@ -21,7 +21,15 @@ const App = () => {
         <ul className="feed"></ul>
 
         <div className="bottom-section">
-          <div className="input-container"></div>
+          <div className="input-container">
+            <input
+              type="text"
+              className="message-input"
+              placeholder="Type a message"
+            />
+            <div id="submit">&#10146;</div>
+          </div>
+          <p className="info">Custom API interation/testing interface.</p>
         </div>
       </section>
     </div>
